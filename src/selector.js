@@ -18,6 +18,15 @@ var traverseDomAndCollectElements = function(matchFunc, startEl) {
 //
 var selectorTypeMatcher = function(selector) {
   // your code here
+  if (selector[0]==="#") {
+  	return "id";
+  } else if (selector[0]===".") {
+  	return "class";
+  } else if (selector.indexOf(".")>1) {
+  	return "tag.class";
+  } else return "tag";
+  
+
 };
 
 var matchFunctionMaker = function(selector) {
@@ -25,6 +34,10 @@ var matchFunctionMaker = function(selector) {
   var matchFunction;
   if (selectorType === "id") {
     // define matchFunction for id
+    matchFunction = function(sampleDivEl) {
+    	return (sampleDivEl.id === selector.substring(1));
+   
+    }
 
   } else if (selectorType === "class") {
     // define matchFunction for class
