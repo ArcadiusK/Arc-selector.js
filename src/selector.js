@@ -1,3 +1,4 @@
+//this is arc-selector
 var traverseDomAndCollectElements = function(matchFunc, startEl) {
   var resultSet = [];
   
