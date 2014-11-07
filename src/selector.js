@@ -1,4 +1,3 @@
-//this is arc-selector
 var traverseDomAndCollectElements = function(matchFunc, startEl) {
   var resultSet = [];
   
@@ -20,11 +19,11 @@ var traverseDomAndCollectElements = function(matchFunc, startEl) {
 var selectorTypeMatcher = function(selector) {
   // your code here
   if (selector[0]==="#") {
-  	return "id";
+    return "id";
   } else if (selector[0]===".") {
-  	return "class";
+    return "class";
   } else if (selector.indexOf(".")>1) {
-  	return "tag.class";
+    return "tag.class";
   } else return "tag";
   
 
@@ -36,19 +35,25 @@ var matchFunctionMaker = function(selector) {
   if (selectorType === "id") {
     // define matchFunction for id
     matchFunction = function(sampleDivEl) {
-    	return (sampleDivEl.id === selector.substring(1));
+      return (sampleDivEl.id === selector.substring(1));
    
     }
-
   } else if (selectorType === "class") {
-    // define matchFunction for class
-    
+    matchFunction = function(sampleDivEl) { 
+      return ((sampleDivEl.className.indexOf(selector.substring(1)) > -1)) 
+    }
   } else if (selectorType === "tag.class") {
-    // define matchFunction for tag.class
     
+    matchFunction = function(sampleDivEl) {
+     return (sampleDivEl.className === selector.substring(selector.indexOf('.')+1));
+    }
+  
+
   } else if (selectorType === "tag") {
+    matchFunction = function(sampleDivEl) {
+      return (sampleDivEl.tagName.toLowerCase() === selector);
     // define matchFunction for tag
-    
+    }
   }
   return matchFunction;
 };
